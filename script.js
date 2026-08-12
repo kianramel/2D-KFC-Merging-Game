@@ -1,6 +1,6 @@
 // load assets 
-const customerImg = new Image();
-customerImg.src = "img/customer.png";
+const customer1Img = new Image();
+customer1Img.src = "img/customer1.png";
 
 const canvas = document.getElementById('gameCanvas');
 const canvasContext = canvas.getContext('2d');
@@ -21,11 +21,11 @@ const rightX = leftWidth; // Starts where the left side ends
 const rightWidth = canvas.width - leftWidth; // The remaining 78% for merging
 
 // Colour the customer side cream 
-canvasContext.fillStyle = "#FFFDD0";
+canvasContext.fillStyle = "#C46B63";
 canvasContext.fillRect(0,0, leftWidth, canvas.height);
 
 // Colour the right side deeper cream
-canvasContext.fillStyle = "#F5EEBB";
+canvasContext.fillStyle = "#C46B63";
 canvasContext.fillRect(rightX, 0, rightWidth, canvas.height);
 
 // kitchen is the name of the merging area
@@ -41,9 +41,33 @@ canvasContext.fillStyle = "white";
 canvasContext.fillRect(kitchenX, kitchenY, kitchenWidth, kitchenHeight);
 
 // Draw the red border outline 
-canvasContext.strokeStyle = "#E4002B"; //kfc red colour
+canvasContext.strokeStyle = "orange"; 
 canvasContext.lineWidth = 6; //thickness of the border
 canvasContext.strokeRect(kitchenX, kitchenY, kitchenWidth, kitchenHeight); 
+
+// customer dimensions
+const charWidth = leftWidth * 1.4; 
+const charHeight = canvas.height * 0.7;
+const charX = (leftWidth - charWidth) / 2;
+const charY = canvas.height - charHeight - 20;
+
+// draw character 
+canvasContext.drawImage(customer1Img, charX, charY, charWidth, charHeight);
+
+//customer dimensions 
+const bubbleWidth = leftWidth * 0.9
+const bubbleHeight = canvas.height * 0.3
+const bubbleX = (leftWidth - bubbleWidth)
+const bubbleY = canvas.height - bubbleHeight - 20;
+
+//draw speech bubble for customers order 
+canvasContext.fillStyle = "white"; 
+canvasContext.fillRect(bubbleX, bubbleY, bubbleWidth, bubbleHeight);
+
+canvasContext.strokeStyle = "black"; 
+canvasContext.lineWidth = 4; 
+canvasContext.strokeRect(bubbleX, bubbleY, bubbleWidth, bubbleHeight);
+
 
   var myRAF = requestAnimationFrame(gameLoop);
 }
