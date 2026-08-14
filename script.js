@@ -2,6 +2,8 @@
 const customer1Img = new Image();
 customer1Img.src = "img/customer1.png";
 
+//load assests for the food merging maje a list? 
+
 const canvas = document.getElementById('gameCanvas');
 const canvasContext = canvas.getContext('2d');
 
@@ -20,11 +22,11 @@ const leftWidth = canvas.width * 0.22; // 22% of screen width for customer
 const rightX = leftWidth; // Starts where the left side ends
 const rightWidth = canvas.width - leftWidth; // The remaining 78% for merging
 
-// Colour the customer side cream 
+// Colour the customer side  
 canvasContext.fillStyle = "#C46B63";
 canvasContext.fillRect(0,0, leftWidth, canvas.height);
 
-// Colour the right side deeper cream
+// Colour the right side  
 canvasContext.fillStyle = "#C46B63";
 canvasContext.fillRect(rightX, 0, rightWidth, canvas.height);
 
@@ -48,25 +50,58 @@ canvasContext.strokeRect(kitchenX, kitchenY, kitchenWidth, kitchenHeight);
 // customer dimensions
 const charWidth = leftWidth * 1.4; 
 const charHeight = canvas.height * 0.7;
-const charX = (leftWidth - charWidth) / 2;
-const charY = canvas.height - charHeight - 20;
+const charX = -85;
+const charY = 250;
 
 // draw character 
 canvasContext.drawImage(customer1Img, charX, charY, charWidth, charHeight);
 
 //customer dimensions 
-const bubbleWidth = leftWidth * 0.9
-const bubbleHeight = canvas.height * 0.3
-const bubbleX = (leftWidth - bubbleWidth)
-const bubbleY = canvas.height - bubbleHeight - 20;
+const bubbleWidth = leftWidth * 0.8
+const bubbleHeight = canvas.height * 0.1
+const bubbleX = 40;
+const bubbleY = 85;
 
 //draw speech bubble for customers order 
 canvasContext.fillStyle = "white"; 
 canvasContext.fillRect(bubbleX, bubbleY, bubbleWidth, bubbleHeight);
 
 canvasContext.strokeStyle = "black"; 
-canvasContext.lineWidth = 4; 
+canvasContext.lineWidth = 6; 
 canvasContext.strokeRect(bubbleX, bubbleY, bubbleWidth, bubbleHeight);
+
+//text inside the speech bubble 
+canvasContext.fillStyle = "black";
+canvasContext.font = "26px Arial";
+canvasContext.fillText("Could I please have fries?", 50, 140 );
+
+//first bubble connecting to customer dimensions
+const tailWidth1 = leftWidth *0.1
+const tailHeight1 = canvas.height *0.05
+const tailX1 = 75;
+const tailY1 = 195;
+
+canvasContext.fillStyle = "white"; 
+canvasContext.fillRect(tailX1, tailY1, tailWidth1, tailHeight1);
+
+canvasContext.strokeStyle = "black"; 
+canvasContext.lineWidth = 6; 
+canvasContext.strokeRect(tailX1, tailY1, tailWidth1, tailHeight1);
+
+//second bubble connecting to customer dimensions
+const tailWidth2 = leftWidth *0.08
+const tailHeight2 = canvas.height *0.04
+const tailX2 = 100;
+const tailY2 = 260;
+
+canvasContext.fillStyle = "white"; 
+canvasContext.fillRect(tailX2, tailY2, tailWidth2, tailHeight2);
+
+canvasContext.strokeStyle = "black"; 
+canvasContext.lineWidth = 6; 
+canvasContext.strokeRect(tailX2, tailY2, tailWidth2, tailHeight2);
+
+//dropping the items for merging
 
 
   var myRAF = requestAnimationFrame(gameLoop);
