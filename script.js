@@ -2,7 +2,7 @@
 const customer1Img = new Image();
 customer1Img.src = "img/customer1.png";
 
-//load assests for the food merging maje a list? 
+//load assets for the food merging make a list? 
 
 const canvas = document.getElementById('gameCanvas');
 const canvasContext = canvas.getContext('2d');
@@ -102,6 +102,35 @@ canvasContext.lineWidth = 6;
 canvasContext.strokeRect(tailX2, tailY2, tailWidth2, tailHeight2);
 
 //dropping the items for merging
+	arr = new Array();
+	
+	function draw()
+	{
+		//canvasContext.fillRect(0,0,800,800);
+		var square = kitchen(); 
+		
+		if (Math.random() < 0.1)
+		{
+			square.x = Math.floor(Math.random() * 600);
+			square.y = 0;
+			arr.push(square);
+		}
+		
+		for (i=arr.length -1; i > 0; i--)
+		{
+			arr[i].y++;
+			
+			canvasContext.beginPath();
+			canvasContext.arc(arr[i].x, arr[i].y, 20,0, Math.PI*2, true);
+			canvasContext.fillStyle = "red";
+			canvasContext.fill();
+		}
+	
+	}
+	
+	setInterval(draw,100);
+	
+	//var gravity = 1;
 
 
   var myRAF = requestAnimationFrame(gameLoop);
