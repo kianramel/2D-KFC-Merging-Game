@@ -105,7 +105,7 @@ canvasContext.strokeRect(tailX2, tailY2, tailWidth2, tailHeight2);
 	arr = new Array();
 	
 	function draw()
-	{
+	{  
 		//canvasContext.fillRect(0,0,800,800);
 		var square = kitchen(); 
 		
