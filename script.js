@@ -102,6 +102,8 @@ canvasContext.strokeStyle = "black";
 canvasContext.lineWidth = 6; 
 canvasContext.strokeRect(tailX2, tailY2, tailWidth2, tailHeight2);
 
+
+
 /*dropping the items for merging
 	arr = new Array();
 	
@@ -129,6 +131,7 @@ canvasContext.strokeRect(tailX2, tailY2, tailWidth2, tailHeight2);
 	
 	}
 	
+	
 	setInterval(draw,100);
 	
 	var gravity = 1;*/
@@ -138,3 +141,23 @@ canvasContext.strokeRect(tailX2, tailY2, tailWidth2, tailHeight2);
 
 //start the loop
 gameLoop();
+
+//sFOOD TIERS SETUP  
+const kfcTiers = [ 
+	{ level: 0, name: "Salt Sachet", radius: 18 }, 
+	{ level: 1, name: "Secret Seasoning", radius: 26 }, 
+	{ level: 2, name: "Small Fries", radius: 36 }, 
+	{ level: 3, name: "Chicken Bites", radius: 48 }, 
+	{ level: 4, name: "Chickenm Jockey",radius: 60 }, 
+	{ level: 5, name: "Chicken Bucket", radius: 75 }, 
+	{ level: 6, name: "Meal Deal",radius: 92 }, 
+	{ level: 7, name: "Full Meal Combo", radius: 110 } 
+]; 
+
+
+
+
+
+// Load image assets for each tier kfcTiers.forEach((tier, index) => { tier.image = new Image(); tier.image.src = `img/tier${index}.png`; });
+
+// Holds all food items currently bouncing in the kitchen let activeItems = [];
