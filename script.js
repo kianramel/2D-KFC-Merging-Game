@@ -2,7 +2,8 @@
 const customer1Img = new Image();
 customer1Img.src = "img/customer1.png";
 
-//load assets for the food merging make a list? 
+//FOOD TIER LIST
+
 
 const canvas = document.getElementById('gameCanvas');
 const canvasContext = canvas.getContext('2d');
@@ -101,7 +102,7 @@ canvasContext.strokeStyle = "black";
 canvasContext.lineWidth = 6; 
 canvasContext.strokeRect(tailX2, tailY2, tailWidth2, tailHeight2);
 
-//dropping the items for merging
+/*dropping the items for merging
 	arr = new Array();
 	
 	function draw()
@@ -130,9 +131,8 @@ canvasContext.strokeRect(tailX2, tailY2, tailWidth2, tailHeight2);
 	
 	setInterval(draw,100);
 	
-	//var gravity = 1;
-
-
+	var gravity = 1;*/
+	
   var myRAF = requestAnimationFrame(gameLoop);
 }
 
