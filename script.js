@@ -1,9 +1,3 @@
-//things to fix next period that i t cant be moved more to the right or left 
-//can move it left and right after it reaches the floor 
-//do the rest of the food items 
-//merge give to customer 
-//more different customer orders
-
 // load assets 
 const customer1Img = new Image();
 customer1Img.src = "img/customer1.png"; 
@@ -11,19 +5,48 @@ const level0Img = new Image();
 level0Img.src = "img/level0.png"; 
 canvas = document.getElementById('gameCanvas');
 
+	class Customer { 
+		constructor(x,y) { 
+				this.x = x;
+				this.y = y;
+				this.width = 350;
+				this.height = 550;
+				this.image = new Image();
+				this.image.src = "img/customer1.png"; 
+		}
+	}
+
+const char1 = new Customer (7,20)
+
+	class salt {
+		constructor(x,y) {
+				this.x = x;
+				this.y = y;
+				this.width = 200;
+				this.height = 200;
+				this.image = new Image();
+				this.image.src = "img/level0.png";
+		}
+	}
+	
+const salt1 = new Salt (632,1)
+
+	class kitchen {
+		constructor(width,height) {
+				this.x = 334;
+				this.y = 32;
+				this.width = width;
+				this.height = height;
+		}
+	}
+
+const kitchen = new kitchen (796,736)
+	
 // Set variables 
 //splitting my screen one side for customer one side for the merging part
 const leftWidth = 264; // 22% of screen width for customer
 const rightX = 264; // Starts where the left side ends
 const rightWidth = 936; // The remaining 78% for merging
-	
-// kitchen is the name of the merging area
-const kitchenHeight = 736; // takes 92% of screen height
-const kitchenWidth = 796; // takes 85% of right side width 
-
-// calculations to make the kitchen be in the middle inside the right side (merge area)
-const kitchenX = 334;
-const kitchenY = 32;
 
 //still fix it according to screen
 //bubble dimensions 
@@ -43,18 +66,7 @@ const tailWidth2 = 20;
 const tailHeight2 = 20;
 const tailX2 = 90;
 const tailY2 = 250;
-	
-const charWidth = 350; 
-const charHeight = 550;
-const charX = 7;
-const charY = 220;
 
-var saltX = 632;
-var saltY = 1;
-var saltWidth = 200;
-var saltHeight = 200;
-
-//fix above 
 
 var isFalling = false;   // Item starts still
 const gravity = 12;      // Drop speed per frame
@@ -157,6 +169,3 @@ window.addEventListener('keyup',this.check,false);
         isFalling = true;
     }
 }
-
-
-
