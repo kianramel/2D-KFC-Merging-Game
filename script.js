@@ -16,7 +16,7 @@ canvas = document.getElementById('gameCanvas');
 		}
 	}
 
-const char1 = new Customer (7,20)
+const char1 = new Customer (190,10)
 
 	class salt {
 		constructor(x,y) {
@@ -26,10 +26,14 @@ const char1 = new Customer (7,20)
 				this.height = 200;
 				this.image = new Image();
 				this.image.src = "img/level0.png";
+				//this.status = 
 		}
+		draw(){
+			canvasContext.drawImage(level0Img, this.x, this.y, this.width, this.height)
+		}//finish this
 	}
 	
-const salt1 = new Salt (632,1)
+
 
 	class kitchen {
 		constructor(width,height) {
@@ -39,38 +43,47 @@ const salt1 = new Salt (632,1)
 				this.height = height;
 		}
 	}
-
-const kitchen = new kitchen (796,736)
 	
-// Set variables 
+const kitchen1 = new kitchen (796,736)
+	
 //splitting my screen one side for customer one side for the merging part
 const leftWidth = 264; // 22% of screen width for customer
 const rightX = 264; // Starts where the left side ends
 const rightWidth = 936; // The remaining 78% for merging
 
-//still fix it according to screen
-//bubble dimensions 
-const bubbleWidth = 305;
-const bubbleHeight = 90;
-const bubbleX = 15;
-const bubbleY = 85;
+	class bubble {
+		constructor(x,y,width,height) {
+				this.x = x;
+				this.y = y;
+				this.width = width;
+				this.height = height;
+		}
+	}
+	
+const bubble1 = new bubble (15,85,305,90)
+	
+	class tail {
+		constructor(x,y,width,height) {
+				this.x= x;
+				this.y= y;
+				this.width = width;
+				this.height = height;
+		}
+	}
 
-//first bubble connecting to customer dimensions
-const tailWidth1 = 30;
-const tailHeight1 = 30;
-const tailX1 = 70;
-const tailY1 = 200;
+const tail1 = new tail (70,200,30,30)
 
-//second bubble connecting to customer dimensions
-const tailWidth2 = 20;
-const tailHeight2 = 20;
-const tailX2 = 90;
-const tailY2 = 250;
-
+//dimensions of second tail connecting to customer 
+const tail2 = new tail (90,250,20,20)
 
 var isFalling = false;   // Item starts still
 const gravity = 12;      // Drop speed per frame
 const floorY = 568;      // Floor position inside kitchen (kitchenY + kitchenHeight - saltHeight)
+
+const gameObjects = []
+const salt1 = new salt (632,1)
+gameObjects.push(salt1);
+
 
 const isGameRunning = true;
 //const distance = 0;
@@ -95,28 +108,28 @@ function draw(){
 
 	// Colour the customer side  
 	canvasContext.fillStyle = "#C46B63";
-	canvasContext.fillRect(0,0, leftWidth, 800);
+	canvasContext.fillRect(0,0, 264, 800);
 
 	// Colour the right side  
 	canvasContext.fillStyle = "#C46B63";
-	canvasContext.fillRect(rightX, 0, rightWidth, 800);
+	canvasContext.fillRect(264, 0, 936, 800);
 
 	// colour inside the merging kitchen area 
 	canvasContext.fillStyle = "white";
-	canvasContext.fillRect(kitchenX, kitchenY, kitchenWidth, kitchenHeight);
+	canvasContext.fillRect(334, 32, 796, 736);
 
 	// Draw the red border outline 
 	canvasContext.strokeStyle = "orange"; 
 	canvasContext.lineWidth = 6; //thickness of the border
-	canvasContext.strokeRect(kitchenX, kitchenY, kitchenWidth, kitchenHeight); 
+	canvasContext.strokeRect(334, 32, 796, 736); 
 
 	//draw speech bubble for customers order 
 	canvasContext.fillStyle = "white"; 
-	canvasContext.fillRect(bubbleX, bubbleY, bubbleWidth, bubbleHeight);
+	canvasContext.fillRect(15, 85, 305, 90);
 
 	canvasContext.strokeStyle = "black"; 
 	canvasContext.lineWidth = 6; 
-	canvasContext.strokeRect(bubbleX, bubbleY, bubbleWidth, bubbleHeight);
+	canvasContext.strokeRect(15, 85, 305, 90);
 
 	//text inside the speech bubble 
 	canvasContext.fillStyle = "black";
@@ -124,22 +137,23 @@ function draw(){
 	canvasContext.fillText("Could I please have fries?", 25, 140 );
 
 	canvasContext.fillStyle = "white"; 
-	canvasContext.fillRect(tailX1, tailY1, tailWidth1, tailHeight1);
+	canvasContext.fillRect(70,200,30,30);
 
 	canvasContext.strokeStyle = "black"; 
 	canvasContext.lineWidth = 6; 
-	canvasContext.strokeRect(tailX1, tailY1, tailWidth1, tailHeight1);
+	canvasContext.strokeRect(70,200,30,30);
 
 	canvasContext.fillStyle = "white"; 
-	canvasContext.fillRect(tailX2, tailY2, tailWidth2, tailHeight2);
+	canvasContext.fillRect(90,250,20,20);
 
 	canvasContext.strokeStyle = "black"; 
 	canvasContext.lineWidth = 6; 
-	canvasContext.strokeRect(tailX2, tailY2, tailWidth2, tailHeight2);
+	canvasContext.strokeRect(90,250,20,20);
 	
 	//Draw Customer + Item 
-	canvasContext.drawImage(customer1Img, charX, charY, charWidth, charHeight); 
-	canvasContext.drawImage(level0Img, saltX, saltY, saltWidth, saltHeight);
+	canvasContext.drawImage(customer1Img, 7,190,350,550);
+	
+	salt1.draw();
 	
 	//Draw Score
 }
@@ -147,25 +161,48 @@ function draw(){
 function update(){
     // Handles the item falling when Enter is pressed
     if (isFalling) {
-        saltY += gravity;
+        salt1.y += gravity;
 
         // Stop the item when it hits the floor
-        if (saltY >= floorY) {
-            saltY = floorY;
-            isFalling = false; // Stop falling physics
+        if (salt1.y >= floorY) {
+            salt1.y = floorY;
+            isFalling = false; // Stop falling phyics
+			salt1.x 
+		
         }
     }
 }
+	
+//if y = floor stop moving 
+// x-coordinate boundaries for the food sprites 
 
 // Move obbject L/R - press enter 
 window.addEventListener('keyup',this.check,false); 
 	function check(e) {
 		var code = e.keyCode;
 		if (code == 37) { 			//Left arrow pressed
-			saltX -= 15;
+			
+			for (let thisObject of gameObjects) {
+				if (isFalling == true){
+					thisObject.x -= 15;
+				}
+			}
 		} else if (code == 39) { 	//Right arrow pressed
-			saltX += 15;
+			for (let thisObject of gameObjects) {
+				thisObject.x += 15;
+		} else if (code == 32) {  // space key
+			for (let thisObject of gameObjects) {
+				isFalling = true;
+    }
+}
+
+
+/*
+			
+			
+		} else if (code == 39) { 	//Right arrow pressed
+			salt1.x += 15;
 		} else if (code == 32) {  // space key
         isFalling = true;
     }
-}
+}*/
