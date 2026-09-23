@@ -1,3 +1,7 @@
+//TO-DO if y = floor stop moving 
+// x-coordinate boundaries for the food sprites 
+
+
 // load assets 
 const customer1Img = new Image();
 customer1Img.src = "img/customer1.png"; 
@@ -26,11 +30,11 @@ const char1 = new Customer (190,10)
 				this.height = 200;
 				this.image = new Image();
 				this.image.src = "img/level0.png";
-				//this.status = 
+				this.status = 'TOP';
 		}
 		draw(){
 			canvasContext.drawImage(level0Img, this.x, this.y, this.width, this.height)
-		}//finish this
+		}
 	}
 	
 
@@ -83,10 +87,10 @@ const floorY = 568;      // Floor position inside kitchen (kitchenY + kitchenHei
 const gameObjects = []
 const salt1 = new salt (632,1)
 gameObjects.push(salt1);
+//for the rest of the custom assets as well
 
 
 const isGameRunning = true;
-//const distance = 0;
 
 // When the HTML page loads, find the canvas and set some settings 
 window.onload = function(){
@@ -153,35 +157,53 @@ function draw(){
 	//Draw Customer + Item 
 	canvasContext.drawImage(customer1Img, 7,190,350,550);
 	
-	salt1.draw();
+	salt1.draw();//
 	
 	//Draw Score
 }
 
-function update(){
+function update(){ //WHOLE part
     // Handles the item falling when Enter is pressed
-    if (isFalling) {
+    if (salt1.status === 'FALLING') {
         salt1.y += gravity;
 
         // Stop the item when it hits the floor
         if (salt1.y >= floorY) {
             salt1.y = floorY;
-            isFalling = false; // Stop falling phyics
-			salt1.x 
+            salt1.status = 'LANDED';
 		
         }
     }
 }
-	
-//if y = floor stop moving 
-// x-coordinate boundaries for the food sprites 
 
 // Move obbject L/R - press enter 
 window.addEventListener('keyup',this.check,false); 
 	function check(e) {
 		var code = e.keyCode;
+		
+			if (code == 37) { // left arrow pressed
+				for (let thisObject of gameObjects) {
+					if (thisObject.status === 'TOP'){
+						thisObject.x -= 15;
+						if (thisObject.x < 334) thisObject.x = 334;
+					}
+				}	
+			} else if (code == 39) { // right arrow pressed
+				for (let thisObject of gameObjects) {
+					if (thisObject.status === 'TOP'){
+					thisObject.x+= 15;
+			} else if (code == 32) { // space key
+				for (let thisObject of gameObjects) {
+					if (thisObject.status === 'FALLING') //landed or falling
+    }
+}
+
+/*
+window.addEventListener('keyup',this.check,false); 
+	function check(e) {
+		var code = e.keyCode;
+		
 		if (code == 37) { 			//Left arrow pressed
-			
 			for (let thisObject of gameObjects) {
 				if (isFalling == true){
 					thisObject.x -= 15;
@@ -195,14 +217,20 @@ window.addEventListener('keyup',this.check,false);
 				isFalling = true;
     }
 }
+--
+function update(){
+    // Handles the item falling when Enter is pressed
+	for (let thisObject of gameObjects) {
+		if (thisObject.status === 'FALLING'){
+			thisObject.y += gravity;
 
-
-/*
-			
-			
-		} else if (code == 39) { 	//Right arrow pressed
-			salt1.x += 15;
-		} else if (code == 32) {  // space key
-        isFalling = true;
+        // Stop the item when it hits the floor
+	for (let thisObject of gameObjects) {
+        if (thisObject.y >= floorY) {
+            thisObject.y = floorY;
+            thisObject.status = 'LANDED';
+		
+        }
     }
-}*/
+}
+*/
