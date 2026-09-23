@@ -1,7 +1,3 @@
-//TO-DO if y = floor stop moving 
-// x-coordinate boundaries for the food sprites 
-
-
 // load assets 
 const customer1Img = new Image();
 customer1Img.src = "img/customer1.png"; 
@@ -80,7 +76,7 @@ const tail1 = new tail (70,200,30,30)
 //dimensions of second tail connecting to customer 
 const tail2 = new tail (90,250,20,20)
 
-var isFalling = false;   // Item starts still
+//var isFalling = false;   // Item starts still
 const gravity = 12;      // Drop speed per frame
 const floorY = 568;      // Floor position inside kitchen (kitchenY + kitchenHeight - saltHeight)
 
@@ -157,45 +153,62 @@ function draw(){
 	//Draw Customer + Item 
 	canvasContext.drawImage(customer1Img, 7,190,350,550);
 	
-	salt1.draw();//
+	salt1.draw();
 	
 	//Draw Score
 }
 
 function update(){ //WHOLE part
     // Handles the item falling when Enter is pressed
-    if (salt1.status === 'FALLING') {
-        salt1.y += gravity;
-
+	for (let thisObject of gameObjects) {
+		if (thisObject.status === 'FALLING'){
+			thisObject.y += gravity;
+		}
+	}
         // Stop the item when it hits the floor
-        if (salt1.y >= floorY) {
-            salt1.y = floorY;
-            salt1.status = 'LANDED';
-		
-        }
-    }
+	for (let thisObject of gameObjects) {
+        if (thisObject.y >= floorY) {
+            thisObject.y = floorY;
+            thisObject.status = 'LANDED';
+		}
+	}
 }
-
+		
 // Move obbject L/R - press enter 
 window.addEventListener('keyup',this.check,false); 
-	function check(e) {
-		var code = e.keyCode;
+function check(e) {
+	var code = e.keyCode;
+	
+	if (code == 37) { // left arrow pressed
+		for (let thisObject of gameObjects) {
+			if (thisObject.status === 'TOP'){
+				thisObject.x -= 15;
+			if (thisObject.x < 334) thisObject.x = 334; //boundary add for the right side as well
+			}
+			if (thisObject.status === 'LANDED'){
+				// shouldnt move while on the ground
+			
+			}	
+		} 
+	}
+	else if (code == 39) { // right arrow pressed
+		for (let thisObject of gameObjects) {
+			if (thisObject.status === 'TOP'){
+				thisObject.x+= 15;
+			}
+			if (thisObject.status === 'LANDED'){
+				// shouldnt move while on the ground
+			}
+		}
+	} else if (code == 32) { // space key
+			for (let thisObject of gameObjects){
+				console.log(thisObject.status);
+				if (thisObject.status === 'TOP') {
+					thisObject.status = "FALLING";
+				}
+			}
 		
-			if (code == 37) { // left arrow pressed
-				for (let thisObject of gameObjects) {
-					if (thisObject.status === 'TOP'){
-						thisObject.x -= 15;
-						if (thisObject.x < 334) thisObject.x = 334;
-					}
-				}	
-			} else if (code == 39) { // right arrow pressed
-				for (let thisObject of gameObjects) {
-					if (thisObject.status === 'TOP'){
-					thisObject.x+= 15;
-			} else if (code == 32) { // space key
-				for (let thisObject of gameObjects) {
-					if (thisObject.status === 'FALLING') //landed or falling
-    }
+	}
 }
 
 /*
@@ -233,4 +246,6 @@ function update(){
         }
     }
 }
+
+if (thisObject.status === 'TOP' || thisObject.status === 'FALLING'){
 */
