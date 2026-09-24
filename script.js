@@ -175,7 +175,7 @@ function update(){ //WHOLE part
 }
 		
 // Move obbject L/R - press enter 
-window.addEventListener('keyup',this.check,false); 
+window.addEventListener('keydown',this.check,false); 
 function check(e) {
 	var code = e.keyCode;
 	
@@ -183,7 +183,7 @@ function check(e) {
 		for (let thisObject of gameObjects) {
 			if (thisObject.status === 'TOP'){
 				thisObject.x -= 15;
-			if (thisObject.x < 334) thisObject.x = 334; //boundary add for the right side as well
+			if (thisObject.x < 338) thisObject.x = 338; //boundary add for the right side as well
 			}
 			if (thisObject.status === 'LANDED'){
 				// shouldnt move while on the ground
@@ -196,11 +196,14 @@ function check(e) {
 			if (thisObject.status === 'TOP'){
 				thisObject.x+= 15;
 			}
+			if (thisObject.x > 927) {
+				thisObject.x = 927;
+			}
 			if (thisObject.status === 'LANDED'){
 				// shouldnt move while on the ground
 			}
 		}
-	} else if (code == 32) { // space key
+	}  if (code == 32) { // space key
 			for (let thisObject of gameObjects){
 				console.log(thisObject.status);
 				if (thisObject.status === 'TOP') {
