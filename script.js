@@ -1,9 +1,15 @@
 // load assets 
 const customer1Img = new Image();
 customer1Img.src = "img/customer1.png"; 
+
 const level0Img = new Image();
 level0Img.src = "img/level0.png"; 
+
+/*const level1Img = new Image();
+level1Img.src = "img/level1.png";*/
+
 canvas = document.getElementById('gameCanvas');
+
 
 	class Customer { 
 		constructor(x,y) { 
@@ -26,15 +32,15 @@ const char1 = new Customer (190,10)
 				this.height = 200;
 				this.image = new Image();
 				this.image.src = "img/level0.png";
-				this.status = 'TOP';
+				this.status = 'INVISIBLE';
 		}
 		draw(){
-			canvasContext.drawImage(level0Img, this.x, this.y, this.width, this.height)
+			if (this.status != 'INVISIBLE'){
+				canvasContext.drawImage(level0Img, this.x, this.y, this.width, this.height)
+			}
 		}
 	}
 	
-
-
 	class kitchen {
 		constructor(width,height) {
 				this.x = 334;
@@ -83,6 +89,12 @@ const floorY = 568;      // Floor position inside kitchen (kitchenY + kitchenHei
 const gameObjects = []
 const salt1 = new salt (632,1)
 gameObjects.push(salt1);
+const salt2 = new salt (632,1)
+gameObjects.push(salt2);
+
+currentObject = 0
+// TODO - add code here to shuffle the order of the list
+gameObjects[currentObject].status = 'TOP';
 //for the rest of the custom assets as well
 
 
@@ -154,63 +166,57 @@ function draw(){
 	canvasContext.drawImage(customer1Img, 7,190,350,550);
 	
 	salt1.draw();
+	salt2.draw();
 	
 	//Draw Score
 }
 
 function update(){ //WHOLE part
     // Handles the item falling when Enter is pressed
-	for (let thisObject of gameObjects) {
-		if (thisObject.status === 'FALLING'){
-			thisObject.y += gravity;
+		if (gameObjects[currentObject].status === 'FALLING'){
+			gameObjects[currentObject].y += gravity;
 		}
-	}
         // Stop the item when it hits the floor
-	for (let thisObject of gameObjects) {
-        if (thisObject.y >= floorY) {
-            thisObject.y = floorY;
-            thisObject.status = 'LANDED';
+        if (gameObjects[currentObject].y >= floorY) {
+            gameObjects[currentObject].y = floorY;
+            gameObjects[currentObject].status = 'LANDED';
+			currentObject += 1;
+			gameObjects[currentObject].status = 'TOP';
 		}
-	}
 }
 		
 // Move obbject L/R - press enter 
 window.addEventListener('keydown',this.check,false); 
 function check(e) {
 	var code = e.keyCode;
-	
+
 	if (code == 37) { // left arrow pressed
-		for (let thisObject of gameObjects) {
-			if (thisObject.status === 'TOP'){
-				thisObject.x -= 15;
-			if (thisObject.x < 338) thisObject.x = 338; //boundary add for the right side as well
+			if (gameObjects[currentObject].status === 'TOP'){
+				gameObjects[currentObject].x -= 15;
 			}
-			if (thisObject.status === 'LANDED'){
+			if (gameObjects[currentObject].x < 338) {
+				gameObjects[currentObject].x = 338; // x-boundary
+			}
+			if (gameObjects[currentObject].status === 'LANDED'){
 				// shouldnt move while on the ground
-			
 			}	
-		} 
-	}
+	} 	
 	else if (code == 39) { // right arrow pressed
-		for (let thisObject of gameObjects) {
-			if (thisObject.status === 'TOP'){
-				thisObject.x+= 15;
+			if (gameObjects[currentObject].status === 'TOP'){
+				gameObjects[currentObject].x+= 15;
 			}
-			if (thisObject.x > 927) {
-				thisObject.x = 927;
+			if (gameObjects[currentObject].x > 927) { // x-boundary
+				gameObjects[currentObject].x = 927;
 			}
-			if (thisObject.status === 'LANDED'){
+			if (gameObjects[currentObject].status === 'LANDED'){
 				// shouldnt move while on the ground
 			}
-		}
-	}  if (code == 32) { // space key
-			for (let thisObject of gameObjects){
-				console.log(thisObject.status);
-				if (thisObject.status === 'TOP') {
-					thisObject.status = "FALLING";
+	} 
+	if (code == 32) { // space key
+				console.log(gameObjects[currentObject].status);
+				if (gameObjects[currentObject].status === 'TOP') {
+					gameObjects[currentObject].status = "FALLING";
 				}
-			}
-		
 	}
 }
 
