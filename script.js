@@ -238,10 +238,14 @@ const bucket1 = new bucket (632,1)
 gameObjects.push(bucket1);
 const meal1 = new meal (632,1)
 gameObjects.push(meal1);
+const combo1 = new combo (632,1)
+gameObjects.push(combo1);
 
+let currentObject = Math.floor(Math.random() * gameObjects.length);
 
 currentObject = 0
 // TODO - add code here to shuffle the order of the list
+
 gameObjects[currentObject].status = 'TOP';
 //for the rest of the custom assets as well
 
@@ -334,8 +338,14 @@ function update(){ //WHOLE part
         if (gameObjects[currentObject].y >= floorY) {
             gameObjects[currentObject].y = floorY;
             gameObjects[currentObject].status = 'LANDED';
-			currentObject += 1;
-			gameObjects[currentObject].status = 'TOP';
+						
+						//Use Math.random() to pick a brand new random item 
+						currentObject = Math.floor(Math.random() * gameObjects.length);
+						
+						// reset the newly chosen object to the top spawn point 
+						gameObjects[currentObject].x = 632;
+						gameObjects[currentObject].y = 1;						
+						gameObjects[currentObject].status = 'TOP';
 		}
 		//detect collisions 
 }
@@ -374,3 +384,5 @@ function check(e) {
 				}
 	}
 }
+
+//problem encountered - wont allow the same asset on the screen at the same time
