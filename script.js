@@ -5,8 +5,26 @@ customer1Img.src = "img/customer1.png";
 const level0Img = new Image();
 level0Img.src = "img/level0.png"; 
 
-/*const level1Img = new Image();
-level1Img.src = "img/level1.png";*/
+const level1Img = new Image();
+level1Img.src = "img/level1.png";
+
+const level2Img = new Image();
+level2Img.src = "img/level2.png";
+
+const level3Img = new Image();
+level3Img.src = "img/level3.png";
+
+const level4Img = new Image();
+level4Img.src = "img/level4.png";
+
+const level5Img = new Image();
+level5Img.src = "img/level5.png";
+
+const level6Img = new Image();
+level6Img.src = "img/level6.png";
+
+const level7Img = new Image();
+level7Img.src = "img/level7.png";
 
 canvas = document.getElementById('gameCanvas');
 
@@ -15,8 +33,8 @@ canvas = document.getElementById('gameCanvas');
 		constructor(x,y) { 
 				this.x = x;
 				this.y = y;
-				this.width = 350;
-				this.height = 550;
+				this.width = 200;
+				this.height = 200;
 				this.image = new Image();
 				this.image.src = "img/customer1.png"; 
 		}
@@ -37,6 +55,125 @@ const char1 = new Customer (190,10)
 		draw(){
 			if (this.status != 'INVISIBLE'){
 				canvasContext.drawImage(level0Img, this.x, this.y, this.width, this.height)
+			}
+		}
+	}
+	
+	class secret {
+		constructor(x,y) {
+				this.x = x;
+				this.y = y;
+				this.width = 200;
+				this.height = 200;
+				this.image = new Image();
+				this.image.src = "img/level1.png";
+				this.status = 'INVISIBLE';
+		}
+		draw(){
+			if (this.status != 'INVISIBLE'){
+				canvasContext.drawImage(level1Img, this.x, this.y, this.width, this.height) 
+			}
+		}
+	}
+
+	class fries {
+		constructor(x,y) {
+				this.x = x;
+				this.y = y;
+				this.width = 120;
+				this.height = 200;
+				this.image = new Image();
+				this.image.src = "img/level2.png";
+				this.status = 'INVISIBLE';
+		}
+		draw(){
+			if (this.status != 'INVISIBLE'){
+				canvasContext.drawImage(level2Img, this.x, this.y, this.width, this.height) 
+			}
+		}
+	}
+
+	class bites {
+		constructor(x,y) {
+				this.x = x;
+				this.y = y;
+				this.width = 130;
+				this.height = 200;
+				this.image = new Image();
+				this.image.src = "img/level3.png";
+				this.status = 'INVISIBLE';
+		}
+		draw(){
+			if (this.status != 'INVISIBLE'){
+				canvasContext.drawImage(level3Img, this.x, this.y, this.width, this.height) 
+			}
+		}
+	}
+	
+	class burger {
+		constructor(x,y) {
+				this.x = x;
+				this.y = y;
+				this.width = 200;
+				this.height = 200;
+				this.image = new Image();
+				this.image.src = "img/level4.png";
+				this.status = 'INVISIBLE';
+		}
+		draw(){
+			if (this.status != 'INVISIBLE'){
+				canvasContext.drawImage(level4Img, this.x, this.y, this.width, this.height) 
+			}
+		}
+	}
+	
+	class bucket {
+		constructor(x,y) {
+				this.x = x;
+				this.y = y;
+				this.width = 100;
+				this.height = 200;
+				this.image = new Image();
+				this.image.src = "img/level5.png";
+				this.status = 'INVISIBLE';
+		}
+		draw(){
+			if (this.status != 'INVISIBLE'){
+				canvasContext.drawImage(level5Img, this.x, this.y, this.width, this.height) 
+			}
+		}
+	}
+	
+	class meal {
+		constructor(x,y) {
+				this.x = x;
+				this.y = y;
+				this.width = 200;
+				this.height = 200;
+				this.image = new Image();
+				this.image.src = "img/level6.png";
+				this.status = 'INVISIBLE';
+		}
+		draw(){
+			if (this.status != 'INVISIBLE'){
+				canvasContext.drawImage(level6Img, this.x, this.y, this.width, this.height) 
+			}
+		}
+	}
+
+	class combo {
+		constructor(x,y) {
+				this.x = x;
+				this.y = y;
+				this.width = 200;
+				this.height = 200;
+				this.image = new Image();
+				this.image.src = "img/level7.png";
+				this.status = 'INVISIBLE';
+		}
+		draw(){
+			if (this.status != 'INVISIBLE'){
+				canvasContext.drawImage(level7Img, this.x, this.y, this.width, this.height) 
 			}
 		}
 	}
@@ -82,15 +219,26 @@ const tail1 = new tail (70,200,30,30)
 //dimensions of second tail connecting to customer 
 const tail2 = new tail (90,250,20,20)
 
-//var isFalling = false;   // Item starts still
-const gravity = 12;      // Drop speed per frame
-const floorY = 568;      // Floor position inside kitchen (kitchenY + kitchenHeight - saltHeight)
+//var isFalling = false; // Item starts still
+const gravity = 12; // Drop speed per frame
+const floorY = 568; // Floor position inside kitchen (kitchenY + kitchenHeight - saltHeight)
 
 const gameObjects = []
 const salt1 = new salt (632,1)
 gameObjects.push(salt1);
-const salt2 = new salt (632,1)
-gameObjects.push(salt2);
+const secret1 = new secret (632,1)
+gameObjects.push(secret1);
+const fries1 = new fries (632,1)
+gameObjects.push(fries1);
+const bites1 = new bites (632,1)
+gameObjects.push(bites1);
+const burger1 = new burger (632,1)
+gameObjects.push(burger1);
+const bucket1 = new bucket (632,1)
+gameObjects.push(bucket1);
+const meal1 = new meal (632,1)
+gameObjects.push(meal1);
+
 
 currentObject = 0
 // TODO - add code here to shuffle the order of the list
@@ -166,7 +314,13 @@ function draw(){
 	canvasContext.drawImage(customer1Img, 7,190,350,550);
 	
 	salt1.draw();
-	salt2.draw();
+	secret1.draw();
+	fries1.draw();
+	bites1.draw();
+	burger1.draw();
+	bucket1.draw();
+	meal1.draw();
+	combo1.draw();
 	
 	//Draw Score
 }
@@ -183,6 +337,7 @@ function update(){ //WHOLE part
 			currentObject += 1;
 			gameObjects[currentObject].status = 'TOP';
 		}
+		//detect collisions 
 }
 		
 // Move obbject L/R - press enter 
@@ -219,42 +374,3 @@ function check(e) {
 				}
 	}
 }
-
-/*
-window.addEventListener('keyup',this.check,false); 
-	function check(e) {
-		var code = e.keyCode;
-		
-		if (code == 37) { 			//Left arrow pressed
-			for (let thisObject of gameObjects) {
-				if (isFalling == true){
-					thisObject.x -= 15;
-				}
-			}
-		} else if (code == 39) { 	//Right arrow pressed
-			for (let thisObject of gameObjects) {
-				thisObject.x += 15;
-		} else if (code == 32) {  // space key
-			for (let thisObject of gameObjects) {
-				isFalling = true;
-    }
-}
---
-function update(){
-    // Handles the item falling when Enter is pressed
-	for (let thisObject of gameObjects) {
-		if (thisObject.status === 'FALLING'){
-			thisObject.y += gravity;
-
-        // Stop the item when it hits the floor
-	for (let thisObject of gameObjects) {
-        if (thisObject.y >= floorY) {
-            thisObject.y = floorY;
-            thisObject.status = 'LANDED';
-		
-        }
-    }
-}
-
-if (thisObject.status === 'TOP' || thisObject.status === 'FALLING'){
-*/
